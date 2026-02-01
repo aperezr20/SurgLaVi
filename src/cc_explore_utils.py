@@ -19,7 +19,7 @@ except Exception:
 # Data loading & cleaning
 # -----------------------------
 
-LEVEL_NAME_MAP = {1: "task", 2: "step", 3: "phase"}
+LEVEL_NAME_MAP = {1: "fine", 2: "mid", 3: "coarse"}
 
 def connect(db_url: str):
     if create_engine is None:
@@ -146,7 +146,7 @@ def plot_duration_violin_by_level(filtered_captions: pd.DataFrame):
         return None
     fig = px.violin(df, x="level_name", y="duration", box=True, points="all",
                     title="Filtered Caption Duration by Level (seconds)",
-                    category_orders={"level_name": ["task", "step", "phase"]})
+                    category_orders={"level_name": ["fine", "mid", "coarse"]})
     fig.update_layout(xaxis_title="Level", yaxis_title="Duration (seconds)")
     fig.update_yaxes(range=[-50, 1000], autorange=False)
     
@@ -165,7 +165,7 @@ def plot_avg_caption_count_per_video_by_level(filtered_captions: pd.DataFrame):
         return None
 
     rows = []
-    for lvl in ["task", "step", "phase"]:
+    for lvl in ["fine", "mid", "coarse"]:
         sub = df[df["level_name"] == lvl]
         if sub.empty:
             continue
@@ -179,7 +179,7 @@ def plot_avg_caption_count_per_video_by_level(filtered_captions: pd.DataFrame):
     counts_df = pd.concat(rows, ignore_index=True)
     fig = px.violin(counts_df, x="level_name", y="count", box=True, points="all",
                     title="Per-Video Caption Count by Level (Filtered)",
-                    category_orders={"level_name": ["task", "step", "phase"]})
+                    category_orders={"level_name": ["fine", "mid", "coarse"]})
     fig.update_layout(xaxis_title="Level", yaxis_title="Caption count per video")
     
     return fig

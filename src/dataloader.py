@@ -8,9 +8,9 @@ from torch.utils.data import Dataset
 
 # Dataset level identifiers for naming
 DATASET_IDENTIFIER = {
-    1: 'task',
-    2: 'step', 
-    3: 'phase'
+    1: 'fine',
+    2: 'mid', 
+    3: 'coarse'
 }
 
 
@@ -42,7 +42,7 @@ class SurgLaViDataset(Dataset):
             ann_file: Tuple of (database_path, video_root, level_ids)
             transform: Transform function to apply to video frames
             num_frames: Number of frames to sample from each video clip
-            level_ids: List of hierarchy levels to include (1=task, 2=step, 3=phase)
+            level_ids: List of hierarchy levels to include (1=fine, 2=mid, 3=coarse)
         """
         super().__init__()
         
