@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "surgclip"
+version = "0.1.0"
+description = "SurgCLIP: Surgical vision-language model for phase recognition and workflow analysis"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+keywords = ["surgical-ai", "clip", "video-understanding"]
+dependencies = [
+    "torch>=2.6",
+    "torchvision>=0.21",
+    "transformers>=4.30",
+    "einops>=0.4",
+    "timm>=0.6",
+    "Pillow>=9.0",
+    "numpy>=1.21",
+]
+
+[project.optional-dependencies]
+hub = ["huggingface_hub>=0.14"]
+examples = ["opencv-python", "matplotlib", "tqdm"]
+all = ["huggingface_hub>=0.14", "opencv-python", "matplotlib", "tqdm"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["surgclip*"]
+
+[tool.setuptools.package-data]
+surgclip = ["configs/*.json"]
