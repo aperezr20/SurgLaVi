@@ -1,6 +1,6 @@
-# SurgLaVi [MedIA 2026]
+# SurgLaVi
 
-### Large-Scale Hierarchical Dataset for Surgical Vision-Language Representation Learning 
+### Large-Scale Hierarchical Dataset for Surgical Vision-Language Representation Learning [MedIA 2026]
 
 Alejandra Perez<sup>1,2,*</sup>, Chinedu Nwoye<sup>1</sup>, Ramtin Raji Kermani<sup>1</sup>, Omid Mohareri<sup>1</sup>, Muhammad Abdullah Jamal<sup>1</sup>
 
