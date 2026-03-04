@@ -117,7 +117,6 @@ from surgclip import VideoPreprocessor
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-# Weights download automatically on first call
 model, preprocess, tokenizer = surgclip.load("SurgCLIP-B", device=device)
 
 # Load a video clip centered around a frame
