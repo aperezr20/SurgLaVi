@@ -220,31 +220,43 @@ def plot_video_overview_bars(videos: pd.DataFrame, filtered_captions: pd.DataFra
     
     return fig
 
-def plot_categorical_pie(videos: pd.DataFrame, column: str, min_count: int = 20):
+def plot_categorical_pie(videos: pd.DataFrame, column: str, min_pct: float = 0.002):
     """
     Interactive pie chart for a categorical column in videos.
+    Categories representing at least min_pct (default 0.2%) of all videos are displayed.
+    Percentages are computed with respect to the total dataframe (including hidden categories).
     """
     if videos.empty or column not in videos.columns:
         print(f"No data for pie: {column}")
         return None
+    
+    total = len(videos)
     vc = videos[column].fillna("Unknown").astype(str).value_counts()
-    vc = vc[vc >= min_count]
-    if vc.empty:
-        print(f"No categories >= {min_count} for {column}.")
+    
+    pct = vc / total
+    
+    vc_display = vc[pct >= min_pct]
+    
+    if vc_display.empty:
+        print(f"No categories >= {min_pct*100:.1f}% for {column}.")
         return None
-    df = vc.rename_axis(column).reset_index(name="count")
+    
+    df = vc_display.rename_axis(column).reset_index(name="count")
+    df["pct_of_total"] = df["count"] / total  # percentage relative to full dataset
+    
     fig = px.pie(
         df,
         names=column,
         values="count",
-        title=f"{column} distribution",
-        hole=0.4
+        title=f"{column} distribution (categories ≥ {min_pct*100:.1f}% of all videos)",
+        hole=0.4,
+        custom_data=["pct_of_total"]
     )
     fig.update_traces(
         textposition="inside",
         textinfo="percent+label",
-        hovertemplate="%{label}: %{value} (%{percent})<extra></extra>",
-        sort=False  # keep your current order; set True if you want descending by count
+        hovertemplate="%{label}: %{value} (%{customdata[0]:.1%} of all videos)<extra></extra>",
+        sort=False
     )
     fig.update_layout(
         showlegend=False,
