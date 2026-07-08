@@ -2,7 +2,7 @@
 
 ## 1. Download Annotations
 
-Download the annotations (converted to a common format) from this [link](https://drive.google.com/file/d/1HYyE7h4d-6DF89zFq74lpecao-MDDNxv/view?usp=share_link) and set the environment variable to point to them:
+Download the annotations (converted to a common format) from this [link](https://drive.google.com/file/d/1l0e3DZBHVbad9Zn1dU3N06Q1v7HmBEtd/view?usp=share_link) and set the environment variable to point to them:
 
 ```bash
 export VL_DATA_DIR=path_to_annotations
